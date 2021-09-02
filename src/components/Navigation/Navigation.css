@@ -1,0 +1,15 @@
+.nav-link {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-link:not(:last-child) {
+  margin-right: 1em;
+}
+
+.nav-link--active {
+  color: orangered;
+}
