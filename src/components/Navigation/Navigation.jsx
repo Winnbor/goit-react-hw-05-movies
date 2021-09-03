@@ -4,7 +4,12 @@ import './Navigation.css';
 export default function Navigation() {
   return (
     <nav>
-      <NavLink to="/" className="nav-link" activeClassName="nav-link--active">
+      <NavLink
+        exact
+        to="/"
+        className="nav-link"
+        activeClassName="nav-link--active"
+      >
         Home
       </NavLink>
       <NavLink

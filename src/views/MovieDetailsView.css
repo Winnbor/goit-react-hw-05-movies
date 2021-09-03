@@ -1,0 +1,13 @@
+.MovieDetailsView {
+  display: flex;
+  text-align: left;
+}
+
+.MovieDetailsView__info {
+  margin-left: 2em;
+}
+
+.MovieDetailsView__more {
+  margin-top: 2em;
+  border-top: 1px solid #555555;
+}
