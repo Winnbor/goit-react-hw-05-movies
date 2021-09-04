@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import { Link } from 'react-router-dom';
 import { fetchTrending } from '../services/fetchApi';
 import MovieGridCard from '../components/MovieGridCard/MovieGridCard';
 
@@ -18,7 +18,9 @@ export default function HomeView() {
       <ul className="default-list">
         {results.map(result => (
           <li key={result.id}>
-            <MovieGridCard result={result} />
+            <Link to={`/movies/${result.id}`}>
+              <MovieGridCard result={result} />
+            </Link>
           </li>
         ))}
       </ul>

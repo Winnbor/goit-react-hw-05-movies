@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { fetchByQuery } from '../services/fetchApi';
+import { Link, Route } from 'react-router-dom';
 
 import Searchbar from '../components/Searchbar/Searchbar';
 import MovieGridCard from '../components/MovieGridCard/MovieGridCard';
-import { Route } from 'react-router';
 
 export default function MoviesView() {
   const [query, setQuery] = useState('');
@@ -37,7 +37,9 @@ export default function MoviesView() {
         <ul className="default-list">
           {results.map(result => (
             <li key={result.id}>
-              <MovieGridCard result={result} />
+              <Link to={`/movies/${result.id}`}>
+                <MovieGridCard result={result} />
+              </Link>
             </li>
           ))}
         </ul>
