@@ -27,9 +27,9 @@ function fetchDetailedMovie(movieId) {
   });
 }
 
-function fetchByQuery(query = 'harry') {
+function fetchByQuery(query) {
   return fetch(
-    `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=1&query=${query}`,
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${query}`,
   ).then(res => {
     if (res.ok) {
       return res.json();
@@ -41,4 +41,37 @@ function fetchByQuery(query = 'harry') {
   });
 }
 
-export { fetchTrending, fetchDetailedMovie, fetchByQuery };
+function fetchMovieCast(movieId) {
+  return fetch(
+    `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`,
+  ).then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+
+    return Promise.reject(
+      new Error(`Ooh no! Something went wrong, try again later`),
+    );
+  });
+}
+
+function fetchMovieReviews(movieId) {
+  return fetch(
+    `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US`,
+  ).then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+
+    return Promise.reject(
+      new Error(`Ooh no! Something went wrong, try again later`),
+    );
+  });
+}
+export {
+  fetchTrending,
+  fetchDetailedMovie,
+  fetchByQuery,
+  fetchMovieCast,
+  fetchMovieReviews,
+};
