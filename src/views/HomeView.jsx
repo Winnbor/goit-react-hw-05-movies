@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { fetchTrending } from '../services/fetchApi';
 import MovieGridCard from '../components/MovieGridCard/MovieGridCard';
 
@@ -7,6 +7,8 @@ import './HomeView.css';
 
 export default function HomeView() {
   const [results, setResults] = useState([]);
+
+  const location = useLocation();
 
   useEffect(() => {
     fetchTrending().then(res => setResults(res.results));
@@ -18,7 +20,12 @@ export default function HomeView() {
       <ul className="default-list">
         {results.map(result => (
           <li key={result.id}>
-            <Link to={`/movies/${result.id}`}>
+            <Link
+              to={{
+                pathname: `/movies/${result.id}`,
+                state: { from: location },
+              }}
+            >
               <MovieGridCard result={result} />
             </Link>
           </li>

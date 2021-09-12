@@ -1,4 +1,5 @@
 .MovieDetailsView {
+  width: 100%;
   display: flex;
   text-align: left;
   align-items: flex-start;
@@ -6,6 +7,7 @@
 
 .MovieDetailsView__info {
   margin-left: 2em;
+  flex-grow: 1;
 }
 
 .MovieDetailsView__more {
