@@ -27,6 +27,7 @@ export default function MovieDetailsView() {
 
   const { url } = useRouteMatch();
   const location = useLocation();
+  console.log(location);
   const history = useHistory();
 
   useEffect(() => {
@@ -68,7 +69,14 @@ export default function MovieDetailsView() {
             <h2>More information</h2>
             <ul>
               <li>
-                <NavLink to={`${url}/cast`}>Cast</NavLink>
+                <NavLink
+                  to={{
+                    pathname: `${url}/cast`,
+                    state: { from: { ...location?.state?.from } },
+                  }}
+                >
+                  Cast
+                </NavLink>
                 <Route path={`${url}/cast`}>
                   <ul>
                     {cast &&
@@ -85,7 +93,14 @@ export default function MovieDetailsView() {
                 </Route>
               </li>
               <li>
-                <NavLink to={`${url}/reviews`}>Reviews</NavLink>
+                <NavLink
+                  to={{
+                    pathname: `${url}/reviews`,
+                    state: { from: { ...location?.state?.from } },
+                  }}
+                >
+                  Reviews
+                </NavLink>
                 <Route path={`${url}/reviews`}>
                   {reviews.length === 0 ? (
                     <p>No reviews here yet</p>
