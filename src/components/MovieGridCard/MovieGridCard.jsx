@@ -1,14 +1,11 @@
 export default function MovieGridCard({ result }) {
+  const src = result?.poster_path
+    ? `https://image.tmdb.org/t/p/w300${result?.poster_path}`
+    : 'https://image.tmdb.org/t/p/w300/AvgrHw6YEehlNxVZNVDoVz2Huht.jpg';
   return (
     <>
-      <img
-        src={`https://image.tmdb.org/t/p/w300${
-          result.poster_path ?? result.backdrop_path
-        }`}
-        alt={result.title ?? result.name}
-        width="300"
-      />
-      <p>{result.title ?? result.name}</p>
+      <img src={src} alt={result?.title ?? result?.name} width="300" />
+      <p>{result?.title ?? result?.name}</p>
     </>
   );
 }

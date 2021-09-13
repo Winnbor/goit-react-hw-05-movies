@@ -27,36 +27,39 @@ export default function MovieDetailsView() {
 
   const { url } = useRouteMatch();
   const location = useLocation();
-  console.log(location);
   const history = useHistory();
 
   useEffect(() => {
     fetchDetailedMovie(movieId)
       .then(res => setMovie(res))
-      .catch(error => console.log(error));
-    fetchMovieCast(movieId)
-      .then(res => setCast(res.cast))
-      .catch(error => console.log(error));
-    fetchMovieReviews(movieId)
-      .then(res => setReviews(res.results))
-      .catch(error => console.log(error));
+      .then(
+        fetchMovieCast(movieId)
+          .then(res => setCast(res.cast))
+          .catch(error => console.log(error)),
+        fetchMovieReviews(movieId)
+          .then(res => setReviews(res.results))
+          .catch(error => console.log(error)),
+      )
+      .catch(error => alert(error));
   }, [movieId]);
 
   const onGoBack = () => {
     history.push(location?.state?.from ?? '/');
   };
 
+  const getSrc = () =>
+    movie?.poster_path
+      ? `https://image.tmdb.org/t/p/w300${movie?.poster_path}`
+      : 'https://image.tmdb.org/t/p/w300/AvgrHw6YEehlNxVZNVDoVz2Huht.jpg';
+
   return (
     <>
-      <button type="button" onClick={onGoBack}>
+      <button type="button" className="back-btn" onClick={onGoBack}>
         Go Back
       </button>
 
       <div className="MovieDetailsView">
-        <img
-          src={`https://image.tmdb.org/t/p/w300${movie?.poster_path}`}
-          alt={movie.title ?? movie.name}
-        />
+        <img src={getSrc()} alt={movie.title ?? movie.name} />
         <div className="MovieDetailsView__info">
           <h1>{`${movie.title ?? movie.name} (${movie.release_date?.slice(
             0,
@@ -78,9 +81,11 @@ export default function MovieDetailsView() {
                   Cast
                 </NavLink>
                 <Route path={`${url}/cast`}>
-                  <ul>
-                    {cast &&
-                      cast.map((el, i) => (
+                  {cast.length === 0 ? (
+                    <p>No information available</p>
+                  ) : (
+                    <ul>
+                      {cast.map((el, i) => (
                         <li key={i}>
                           <CastCard
                             name={el.name}
@@ -89,7 +94,8 @@ export default function MovieDetailsView() {
                           />
                         </li>
                       ))}
-                  </ul>
+                    </ul>
+                  )}
                 </Route>
               </li>
               <li>

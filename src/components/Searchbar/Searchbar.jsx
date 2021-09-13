@@ -22,7 +22,7 @@ function Searchbar({ onFormSubmit }) {
   };
 
   return (
-    <header className="Searchbar">
+    <div className="Searchbar">
       <form className="SearchForm" onSubmit={handleSubmit}>
         <button type="submit" className="SearchForm-button">
           <span className="SearchForm-button-label">Search</span>
@@ -39,7 +39,7 @@ function Searchbar({ onFormSubmit }) {
           placeholder="Search movies"
         />
       </form>
-    </header>
+    </div>
   );
 }
 
